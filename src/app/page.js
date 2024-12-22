@@ -43,7 +43,7 @@ export default function Home() {
           </h2>
           <p className="text-lg mb-6">
             Hi, I'm a developer passionate about building exceptional digital
-            experiences.
+            experiences..
           </p>
         </motion.div>
 
