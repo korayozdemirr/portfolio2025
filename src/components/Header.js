@@ -19,20 +19,23 @@ export default function Header() {
        <nav className="flex flex-1 items-center justify-end">
         <ul className="flex space-x-6 font-medium text-lg">
           <li>
-            <a href="#about" className="hover:text-blue-500 transition">
+            <a href="#about" className="block group transition duration-300">
               About Me
+              <span className="block rounded max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-gray-900 dark:bg-gray-100"></span>
             </a>
           </li>
           <li>
-            <a href="#projects" className="hover:text-blue-500 transition">
+            <a href="#about" className="block group transition duration-300">
               Projects
+              <span className="block rounded max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-gray-900 dark:bg-gray-100"></span>
             </a>
-          </li>
-          <li>
-            <a href="#contact" className="hover:text-blue-500 transition">
+          </li><li>
+            <a href="#about" className="block group transition duration-300">
               Contact
+              <span className="block rounded max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-gray-900 dark:bg-gray-100"></span>
             </a>
           </li>
+         
         </ul>
       </nav>
 
