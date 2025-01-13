@@ -9,14 +9,14 @@
   --primary: #2563eb;
   --secondary: #4f46e5;
   --accent: #3b82f6;
-  
+
   /* Spacing System */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
-  
+
   /* Border Radius */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
@@ -24,7 +24,7 @@
   --radius-full: 9999px;
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   --background: #0a0a0a;
   --foreground: #ededed;
   --primary: #3b82f6;
@@ -81,11 +81,11 @@ body {
 
 /* Contact Section Styles */
 .contact-form {
-  @apply max-w-lg w-full mx-auto space-y-6;
+  @apply w-full mx-auto space-y-8 bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg;
 }
 
 .form-input {
-  @apply w-full p-3 border border-gray-300 rounded-lg 
+  @apply w-full p-4 border border-gray-300 rounded-lg text-base
     focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none
     dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100
     transition-colors duration-200;
@@ -100,16 +100,33 @@ body {
 }
 
 .submit-button {
-  @apply w-full bg-primary text-white py-3 px-6 rounded-lg
-    hover:opacity-90 transition duration-200
-    disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply w-full bg-primary text-white py-4 px-8 rounded-lg text-lg font-medium
+    hover:opacity-90 transition-all duration-200
+    disabled:opacity-50 disabled:cursor-not-allowed
+    flex items-center justify-center gap-2;
 }
 
-.social-links {
-  @apply flex items-center justify-center space-x-6 mt-8;
+.social-link-card {
+  @apply flex items-center gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-900
+    text-gray-800 dark:text-gray-200 transition-all duration-300
+    hover:text-white relative overflow-hidden
+    border border-gray-200 dark:border-gray-700;
 }
 
-.social-link {
-  @apply text-primary dark:text-primary hover:opacity-80
-    transition duration-200 flex items-center gap-2;
+.social-link-card span {
+  @apply flex-1 text-left font-medium truncate;
+}
+
+/* Animation Classes */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }

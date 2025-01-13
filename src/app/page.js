@@ -3,12 +3,26 @@ import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
+import ProjectCard from "@/components/ProjectCard";
 
 export default function Home() {
   const projects = [
-    { name: "Project One", description: "Description for Project One" },
-    { name: "Project Two", description: "Description for Project Two" },
-    { name: "Project Three", description: "Description for Project Three" },
+    {
+      name: "React TODO App",
+      description:
+        "A simple TODO app built with React, Tailwind CSS and Firebase.",
+      image: "/projects/todolist.jpg",
+      github: "https://github.com/korayozdemirr/React-Todo",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
+    },
+    {
+      name: "NoteSphere",
+      description:
+        "NoteSphere is a modern note-taking application built with React, Firebase, and Tailwind CSS. It provides a clean and intuitive interface for creating, organizing, and managing your notes with real-time synchronization.",
+      image: "/projects/Notesphere.jpg",
+      github: "https://github.com/korayozdemirr/Notesphere",
+      technologies: ["React", "FireBase", "Tailwind CSS", "TypeScript"],
+    },
   ];
 
   return (
@@ -33,23 +47,19 @@ export default function Home() {
           id="projects"
           className="section-container bg-white dark:bg-gray-800"
         >
-          <AnimatedSection>
-            <h2 className="section-title">Projects</h2>
+          <AnimatedSection variant="slideUp">
+            <h2 className="section-title">Featured Projects</h2>
             <p className="section-description">
-              Here are some of the projects I've worked on recently. Click to
-              learn more!
+              Here are some of my recent projects that showcase my skills and
+              passion for development.
             </p>
           </AnimatedSection>
-          <AnimatedSection className="project-grid">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl px-4">
             {projects.map((project, index) => (
-              <div key={index} className="card">
-                <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {project.description}
-                </p>
-              </div>
+              <ProjectCard key={project.name} project={project} />
             ))}
-          </AnimatedSection>
+          </div>
         </section>
 
         {/* Skills Section */}
