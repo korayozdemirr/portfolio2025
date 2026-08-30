@@ -25,7 +25,7 @@
 }
 
 .dark, [data-theme="dark"] {
-  --background: #0a0a0a;
+  --background: #111827;
   --foreground: #ededed;
   --primary: #3b82f6;
   --secondary: #6366f1;
