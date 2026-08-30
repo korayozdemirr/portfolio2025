@@ -51,19 +51,19 @@ body {
 }
 
 .section-container {
-  @apply min-h-screen flex flex-col items-center justify-center text-center p-10;
+  @apply min-h-screen flex flex-col items-center justify-center text-center px-6 py-20 lg:px-12 lg:py-24;
 }
 
 .card {
-  @apply bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-lg;
+  @apply bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 p-6;
 }
 
 .section-title {
-  @apply text-4xl font-semibold mb-4;
+  @apply text-4xl md:text-5xl font-bold mb-6 tracking-tight;
 }
 
 .section-description {
-  @apply text-lg mb-6 max-w-3xl;
+  @apply text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed;
 }
 
 .profile-image {
@@ -76,31 +76,31 @@ body {
 
 /* Skills Section Styles */
 .skills-grid {
-  @apply grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto;
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl mx-auto px-4;
 }
 
 .skill-category {
-  @apply card flex flex-col items-center;
+  @apply bg-gray-50/50 dark:bg-gray-900/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col;
 }
 
 .skill-list {
-  @apply grid grid-cols-2 gap-4 mt-4 w-full;
+  @apply grid grid-cols-1 gap-3 mt-4 w-full;
 }
 
 .skill-item {
-  @apply flex items-center gap-2 p-2 rounded-md bg-gray-50 dark:bg-gray-700;
+  @apply flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:border-blue-200 dark:hover:border-blue-800 hover:shadow-md hover:-translate-y-1 transition-all duration-300;
 }
 
 /* Contact Section Styles */
 .contact-form {
-  @apply w-full mx-auto space-y-8 bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg;
+  @apply w-full mx-auto space-y-6 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700;
 }
 
 .form-input {
-  @apply w-full p-4 border border-gray-300 rounded-lg text-base
-    focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none
-    dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100
-    transition-colors duration-200;
+  @apply w-full p-4 border border-gray-200 rounded-xl text-base bg-gray-50
+    focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none focus:bg-white
+    dark:bg-gray-900 dark:border-gray-700 dark:text-gray-100 dark:focus:bg-gray-800
+    transition-all duration-200;
 }
 
 .form-input-error {
