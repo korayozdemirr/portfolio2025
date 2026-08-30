@@ -22,8 +22,10 @@ export default function Header() {
   if (!mounted) return null;
 
   return (
-    <header className="w-full flex items-center justify-between px-5 py-3 bg-gray-50 dark:bg-gray-900 shadow-md">
-      <h1 className="text-xl font-bold">Koray Özdemir</h1>
+    <header className="sticky top-0 z-50 w-full flex items-center justify-between px-5 py-4 bg-gray-50/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+      <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 tracking-tight">
+        Koray Özdemir
+      </h1>
 
       {/* Desktop Navigation */}
       <nav className="hidden md:flex justify-end flex-1 mx-3">
@@ -32,10 +34,10 @@ export default function Header() {
             <li key={index}>
               <a
                 href={item.link}
-                className="relative text-gray-800 dark:text-gray-100 hover:text-blue-500 transition group"
+                className="relative text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group py-2"
               >
                 {item.title}
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all"></span>
+                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 group-hover:w-full transition-all duration-300"></span>
               </a>
             </li>
           ))}
@@ -71,13 +73,14 @@ export default function Header() {
 
       {/* Theme Toggle Button */}
       <button
-        className="flex items-center justify-center p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+        className="flex items-center justify-center p-2.5 rounded-full bg-gray-200/50 dark:bg-gray-800/50 hover:bg-gray-300 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-110 active:scale-95 ml-4"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        aria-label="Toggle Dark Mode"
       >
         {theme === "dark" ? (
-          <MdOutlineWbSunny className="text-yellow-400 text-2xl" />
+          <MdOutlineWbSunny className="text-yellow-400 text-xl" />
         ) : (
-          <MdOutlineModeNight className="text-blue-500 text-2xl" />
+          <MdOutlineModeNight className="text-blue-600 dark:text-blue-400 text-xl" />
         )}
       </button>
     </header>
