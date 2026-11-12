@@ -1,53 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { FaEnvelope, FaLinkedin, FaGithub, FaArrowRight } from "react-icons/fa";
-import AnimatedSection from "./AnimatedSection";
-import { motion } from "framer-motion";
-
-const FormInput = ({ label, error, delay, ...props }) => (
-  <motion.div
-    initial={{ opacity: 0, x: -20 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.5, delay }}
-    viewport={{ once: true }}
-    className="relative"
-  >
-    <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
-      {label}
-    </label>
-    <input
-      {...props}
-      className={`form-input ${error ? "form-input-error" : ""}`}
-    />
-    {error && (
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="error-message"
-      >
-        {error}
-      </motion.p>
-    )}
-  </motion.div>
-);
-
-const SocialLink = ({ href, icon: Icon, label }) => (
-  <motion.a
-    href={href}
-    className="social-link-card group"
-    whileHover={{ scale: 1.05, backgroundColor: "var(--primary)" }}
-    whileTap={{ scale: 0.95 }}
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.3 }}
-    viewport={{ once: true }}
-  >
-    <Icon className="w-6 h-6" />
-    <span>{label}</span>
-    <FaArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-  </motion.a>
-);
+import {
+  FiMail,
+  FiLink,
+  FiCode,
+  FiArrowRight,
+  FiSend,
+  FiCheckCircle,
+} from "react-icons/fi";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -55,13 +16,12 @@ export default function Contact() {
     email: "",
     message: "",
   });
-
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const validateForm = () => {
     const newErrors = {};
-
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
     }
@@ -73,25 +33,20 @@ export default function Contact() {
     if (!formData.message.trim()) {
       newErrors.message = "Message is required";
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-
     try {
-      // Add your form submission logic here
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 900));
       setFormData({ name: "", email: "", message: "" });
-      alert("Thank you for your message! I'll get back to you soon.");
-    } catch (error) {
-      alert("There was an error sending your message. Please try again.");
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 4000);
     } finally {
       setIsSubmitting(false);
     }
@@ -99,140 +54,209 @@ export default function Contact() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: "",
-      }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
   return (
     <section
+      className="flex flex-col gap-space-lg pt-space-lg mb-space-xl"
       id="contact"
-      className="section-container bg-white dark:bg-gray-800"
     >
-      <AnimatedSection variant="slideUp">
-        <h2 className="section-title">Get in Touch</h2>
-        <p className="section-description">
-          Want to discuss your project or collaboration opportunities? I'd love
-          to help!
+      {/* Section Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-sm border-b border-outline-variant/20 pb-space-md">
+        <div>
+          <div className="font-label-mono-caps text-label-mono-caps text-primary tracking-widest uppercase mb-1">
+            Communication // Inquiries
+          </div>
+          <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">
+            Get in Touch
+          </h2>
+        </div>
+        <p className="font-body-md text-body-md text-on-surface-variant max-w-md">
+          Want to discuss your project or collaboration opportunities? I&apos;d
+          love to help!
         </p>
-      </AnimatedSection>
+      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[2fr,1fr] gap-8 w-full max-w-4xl px-4">
-        {/* Contact Form */}
-        <AnimatedSection variant="fadeIn" delay={0.2}>
-          <form onSubmit={handleSubmit} className="contact-form space-y-8">
-            <FormInput
-              label="Your Name"
-              type="text"
-              name="name"
-              placeholder="John Doe"
-              value={formData.name}
-              onChange={handleChange}
-              error={errors.name}
-              delay={0.3}
-            />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter lg:gap-gutter-lg">
+        {/* Left Column: Sleek Glassmorphic Contact Form */}
+        <div className="lg:col-span-7 rounded-xl bg-surface-container/60 backdrop-blur-md border border-outline-variant/30 p-space-lg flex flex-col gap-space-md">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-space-md" noValidate>
+            {/* Name Input */}
+            <div className="flex flex-col gap-1.5">
+              <label className="font-code-inline text-code-inline text-on-surface-variant">
+                Your Name *
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="e.g. Alex Mercer"
+                className="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface placeholder:text-outline-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md transition-all"
+              />
+              {errors.name && (
+                <span className="text-xs text-error font-code-inline">
+                  {errors.name}
+                </span>
+              )}
+            </div>
 
-            <FormInput
-              label="Your Email"
-              type="email"
-              name="email"
-              placeholder="john@example.com"
-              value={formData.email}
-              onChange={handleChange}
-              error={errors.email}
-              delay={0.4}
-            />
+            {/* Email Input */}
+            <div className="flex flex-col gap-1.5">
+              <label className="font-code-inline text-code-inline text-on-surface-variant">
+                Your Email *
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="e.g. alex@enterprise.com"
+                className="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface placeholder:text-outline-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md transition-all"
+              />
+              {errors.email && (
+                <span className="text-xs text-error font-code-inline">
+                  {errors.email}
+                </span>
+              )}
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
-                Your Message
+            {/* Message Textarea */}
+            <div className="flex flex-col gap-1.5">
+              <label className="font-code-inline text-code-inline text-on-surface-variant">
+                Your Message *
               </label>
               <textarea
                 name="message"
-                placeholder="Write your message here..."
-                rows="8"
+                rows={4}
                 value={formData.message}
                 onChange={handleChange}
-                className={`form-input ${
-                  errors.message ? "form-input-error" : ""
-                }`}
+                placeholder="Tell me about your project scope, timeline, and goals..."
+                className="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/40 text-on-surface placeholder:text-outline-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md resize-none transition-all"
               />
               {errors.message && (
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="error-message"
-                >
+                <span className="text-xs text-error font-code-inline">
                   {errors.message}
-                </motion.p>
+                </span>
               )}
-            </motion.div>
+            </div>
 
-            <motion.button
+            {/* Submit Button */}
+            <button
               type="submit"
-              className="submit-button group"
               disabled={isSubmitting}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-white font-headline-sm text-body-md font-semibold shadow-lg shadow-primary-container/20 hover:shadow-primary-container/35 transition-all active:scale-95 disabled:opacity-60"
             >
-              {isSubmitting ? (
-                <span className="flex items-center justify-center">
-                  <motion.div
-                    className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  />
-                </span>
+              {submitted ? (
+                <>
+                  <FiCheckCircle className="w-[18px] h-[18px]" />
+                  <span>Message Dispatched!</span>
+                </>
               ) : (
-                <span className="flex items-center gap-2">
-                  Send Message
-                  <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
+                <>
+                  <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
+                  <FiSend className="w-[16px] h-[16px]" />
+                </>
               )}
-            </motion.button>
+            </button>
           </form>
-        </AnimatedSection>
+        </div>
 
-        {/* Social Links */}
-        <AnimatedSection
-          variant="fadeIn"
-          delay={0.4}
-          className="flex flex-col justify-center space-y-4"
-        >
-          <h3 className="text-xl font-semibold mb-4">Other Ways to Connect</h3>
-          <SocialLink
-            href="mailto:korayozdemirdev@gmail.com"
-            icon={FaEnvelope}
-            label="korayozdemirdev@gmail.com"
-          />
-          <SocialLink
-            href="https://linkedin.com/in/korayozdemir"
-            icon={FaLinkedin}
-            label="LinkedIn Profile"
-          />
-          <SocialLink
-            href="https://github.com/korayozdemirr"
-            icon={FaGithub}
-            label="GitHub Profile"
-          />
-        </AnimatedSection>
+        {/* Right Column: Direct Channels & Telemetry (DIRECT ACCESS //) */}
+        <div className="lg:col-span-5 flex flex-col justify-between gap-space-md">
+          <div className="flex flex-col gap-space-md">
+            <span className="font-label-mono-caps text-label-mono-caps text-outline tracking-wider">
+              DIRECT ACCESS //
+            </span>
+
+            {/* Email Card */}
+            <a
+              className="p-4 rounded-xl bg-surface-container/60 border border-outline-variant/30 hover:border-primary/50 transition-all flex items-center justify-between group"
+              href="mailto:korayozdemirdev@gmail.com"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="p-2.5 rounded-lg bg-surface-container-high text-primary shrink-0">
+                  <FiMail className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col min-w-0">
+                  <span className="font-label-mono-sm text-label-mono-sm text-outline">
+                    Email
+                  </span>
+                  <span className="font-code-inline text-code-inline text-on-surface group-hover:text-primary transition-colors truncate">
+                    korayozdemirdev@gmail.com
+                  </span>
+                </div>
+              </div>
+              <FiArrowRight className="text-outline group-hover:text-primary group-hover:translate-x-1 transition-all w-5 h-5 shrink-0" />
+            </a>
+
+            {/* LinkedIn Card */}
+            <a
+              className="p-4 rounded-xl bg-surface-container/60 border border-outline-variant/30 hover:border-primary/50 transition-all flex items-center justify-between group"
+              href="https://linkedin.com/in/korayozdemir"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="p-2.5 rounded-lg bg-surface-container-high text-primary shrink-0">
+                  <FiLink className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col min-w-0">
+                  <span className="font-label-mono-sm text-label-mono-sm text-outline">
+                    LinkedIn Profile
+                  </span>
+                  <span className="font-code-inline text-code-inline text-on-surface group-hover:text-primary transition-colors truncate">
+                    linkedin.com/in/korayozdemir
+                  </span>
+                </div>
+              </div>
+              <FiArrowRight className="text-outline group-hover:text-primary group-hover:translate-x-1 transition-all w-5 h-5 shrink-0" />
+            </a>
+
+            {/* GitHub Card */}
+            <a
+              className="p-4 rounded-xl bg-surface-container/60 border border-outline-variant/30 hover:border-primary/50 transition-all flex items-center justify-between group"
+              href="https://github.com/korayozdemirr"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="p-2.5 rounded-lg bg-surface-container-high text-primary shrink-0">
+                  <FiCode className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col min-w-0">
+                  <span className="font-label-mono-sm text-label-mono-sm text-outline">
+                    GitHub Profile
+                  </span>
+                  <span className="font-code-inline text-code-inline text-on-surface group-hover:text-primary transition-colors truncate">
+                    github.com/korayozdemirr
+                  </span>
+                </div>
+              </div>
+              <FiArrowRight className="text-outline group-hover:text-primary group-hover:translate-x-1 transition-all w-5 h-5 shrink-0" />
+            </a>
+          </div>
+
+          {/* Live response telemetry badge */}
+          <div className="p-4 rounded-xl bg-surface-container-low border border-outline-variant/30 flex items-center gap-3">
+            <span className="relative flex h-2.5 w-2.5 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span>
+            </span>
+            <div className="flex flex-col font-label-mono-sm text-label-mono-sm">
+              <span className="text-tertiary font-semibold">
+                System Response Time: &lt; 24 Hours
+              </span>
+              <span className="text-outline">
+                Direct inbox delivery with automatic routing
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

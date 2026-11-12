@@ -13,7 +13,7 @@ function ThemeColorMeta() {
       meta.name = "theme-color";
       document.head.appendChild(meta);
     }
-    meta.content = resolvedTheme === "dark" ? "#0a0a0a" : "#ffffff";
+    meta.content = "#0a0e17";
   }, [resolvedTheme]);
 
   return null;
@@ -26,10 +26,10 @@ export default function ThemeProviderWrapper({ children }) {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null; // Sunucu ve istemci uyuşmazlığı önlenir
+  if (!mounted) return null;
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem themes={["light", "dark"]}>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} themes={["dark", "light"]}>
       <ThemeColorMeta />
       {children}
     </ThemeProvider>

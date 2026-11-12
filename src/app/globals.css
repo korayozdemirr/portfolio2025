@@ -3,142 +3,61 @@
 @tailwind utilities;
 
 :root {
-  /* Color System */
-  --background: #ffffff;
-  --foreground: #171717;
-  --primary: #2563eb;
-  --secondary: #4f46e5;
-  --accent: #3b82f6;
-
-  /* Spacing System */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-
-  /* Border Radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
-  --radius-full: 9999px;
-}
-
-.dark, [data-theme="dark"] {
-  --background: #111827;
-  --foreground: #ededed;
-  --primary: #3b82f6;
-  --secondary: #6366f1;
-  --accent: #60a5fa;
+  --background: #0a0e17;
+  --foreground: #dfe2ef;
+  --primary: #adc6ff;
+  --secondary: #c0c1ff;
+  --accent: #4d8eff;
 }
 
 html {
-  background-color: var(--background);
-}
-
-html.dark {
-  background-color: var(--background);
+  background-color: #0a0e17;
+  color: #dfe2ef;
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background-color: inherit;
-  font-family: Arial, Helvetica, sans-serif;
+  color: #dfe2ef;
+  background-color: #0a0e17;
   min-height: 100vh;
   min-height: 100dvh;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-.section-container {
-  @apply min-h-screen flex flex-col items-center justify-center text-center p-10;
+/* Subtle Obsidian Grid System */
+.obsidian-grid-pattern {
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(77, 142, 255, 0.12) 0%, transparent 60%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 32px 32px, 32px 32px;
 }
 
-.card {
-  @apply bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-lg;
+.ambient-glow-blue {
+  box-shadow: 0 0 50px -10px rgba(77, 142, 255, 0.25);
 }
 
-.section-title {
-  @apply text-4xl font-semibold mb-4;
+.hairline-border {
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.section-description {
-  @apply text-lg mb-6 max-w-3xl;
+.hairline-border:hover {
+  border-color: rgba(173, 198, 255, 0.35);
 }
 
-.profile-image {
-  @apply m-5 w-40 h-40 rounded-full object-cover object-top border-4 border-gray-300 shadow-lg;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
-
-.project-grid {
-  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+::-webkit-scrollbar-track {
+  background: #0a0e17;
 }
-
-/* Skills Section Styles */
-.skills-grid {
-  @apply grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto;
+::-webkit-scrollbar-thumb {
+  background: #31353f;
+  border-radius: 3px;
 }
-
-.skill-category {
-  @apply card flex flex-col items-center;
-}
-
-.skill-list {
-  @apply grid grid-cols-2 gap-4 mt-4 w-full;
-}
-
-.skill-item {
-  @apply flex items-center gap-2 p-2 rounded-md bg-gray-50 dark:bg-gray-700;
-}
-
-/* Contact Section Styles */
-.contact-form {
-  @apply w-full mx-auto space-y-8 bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg;
-}
-
-.form-input {
-  @apply w-full p-4 border border-gray-300 rounded-lg text-base
-    focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none
-    dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100
-    transition-colors duration-200;
-}
-
-.form-input-error {
-  @apply border-red-500 focus:ring-red-200 focus:border-red-500;
-}
-
-.error-message {
-  @apply text-sm text-red-500 mt-1;
-}
-
-.submit-button {
-  @apply w-full bg-primary text-white py-4 px-8 rounded-lg text-lg font-medium
-    hover:opacity-90 transition-all duration-200
-    disabled:opacity-50 disabled:cursor-not-allowed
-    flex items-center justify-center gap-2;
-}
-
-.social-link-card {
-  @apply flex items-center gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-900
-    text-gray-800 dark:text-gray-200 transition-all duration-300
-    hover:text-white relative overflow-hidden
-    border border-gray-200 dark:border-gray-700;
-}
-
-.social-link-card span {
-  @apply flex-1 text-left font-medium truncate;
-}
-
-/* Animation Classes */
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
+::-webkit-scrollbar-thumb:hover {
+  background: #4d8eff;
 }
